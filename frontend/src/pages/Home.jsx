@@ -8,9 +8,23 @@ function Home() {
   const [books, setBooks] = useState([]);
   const [mode, setMode] = useState("light");
 
-  const handleMode = () => {
-    setMode(prev => (prev === "light" ? "dark" : "light"));
-  }
+  const nameSort = async () => {
+    try {
+      const response = await axios.get("/api/user/sort/name");
+      setBooks(response.data);
+    } catch (error) {
+      console.error("이름순 정렬 에러:", error);
+    }
+  };
+
+  const createDateSort = async () => {
+    try {
+      const response = await axios.get("/api/user/sort/createdate");
+      setBooks(response.data);
+    } catch (error) {
+      console.error("최신순 정렬 에러:", error);
+    }
+  };
 
   const handleSearch = async () => {
     if (!searchText.trim()) return;
@@ -77,13 +91,19 @@ function Home() {
           onClick={handleAllBooks}
           className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-md shadow"
         >
-          책 한눈에 보러가기
+          전체 책 가져오기
         </button>
         <button
-          onClick={handleMode}
+          onClick={nameSort}
           className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-md shadow"
         >
-          I'm Feeling Lucky
+          제목 순 정렬
+        </button>
+        <button
+          onClick={createDateSort}
+          className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-md shadow"
+        >
+          최신 순 정렬
         </button>
       </div>
 
