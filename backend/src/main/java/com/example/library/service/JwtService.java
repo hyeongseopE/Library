@@ -61,7 +61,7 @@ public class JwtService {
     public Authentication verifyToken(String token){
         String username = parseClaims(token,ACCESS_TOKEN).getSubject();
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        return new UsernamePasswordAuthenticationToken(userDetails.getUsername(),null, userDetails.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(userDetails,null, userDetails.getAuthorities());
     }
 
     public Claims parseClaims(String token, String type){

@@ -1,4 +1,4 @@
 package com.example.library.dto;
 
-public record BorrowRequest(Long bookId) {
+public record BorrowRequest(Long bookId, Long user) {
 }

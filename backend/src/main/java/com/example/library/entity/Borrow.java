@@ -37,6 +37,9 @@ public class Borrow {
         this.status = BorrowStatus.RETURN;
     }
 
+    public void isOver(){
+        this.status = BorrowStatus.OVERDUE;
+    }
 
 
 }

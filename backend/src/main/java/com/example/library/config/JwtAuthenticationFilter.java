@@ -27,11 +27,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
+        String url = request.getRequestURI();
+        System.out.println("요청 url:"+url);
+        if(url.startsWith("/h2-console") || url.startsWith("/api/user") || url.startsWith("/api/signin")){
+            System.out.println("허용된 용청");
+            filterChain.doFilter(request,response);
+            return;
+        }
+
         String token = jwtService.getTokenString(request);
         try{
             if(token != null){
+                System.out.println("토큰이 존재합니다:"+token);
                 Authentication authentication = jwtService.verifyToken(token);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+                System.out.println("인증 성공");
                 filterChain.doFilter(request, response);
             }else{
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

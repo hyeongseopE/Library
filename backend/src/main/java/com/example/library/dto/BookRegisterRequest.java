@@ -2,6 +2,7 @@ package com.example.library.dto;
 
 import lombok.Data;
 
+
 @Data
 public class BookRegisterRequest {
     private String bookName;    // 책이름

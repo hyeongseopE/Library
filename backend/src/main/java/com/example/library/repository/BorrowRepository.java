@@ -12,4 +12,10 @@ public interface BorrowRepository extends JpaRepository<Borrow, Long> {
     List<Borrow> findAllByOrderByCreateDateDesc();
 
     Optional<Borrow> findByBookAndMember(Book book, Member member);
+
+    Optional<Borrow> findTopByBookOrderByCreateDateDesc(Book book);
+
+    Optional<Borrow> findTopByBookAndMemberOrderByCreateDateDesc(Book book, Member member);
+
+    List<Borrow> findAllByMember(Member member);
 }

@@ -71,7 +71,7 @@ public class MemberService {
      *
      * @param searchText
      * @param searchType
-     * @return
+     * @return BookListResponse
      */
     public List<BookListResponse> searchBookList(String searchText, String searchType){
         String searchPattern = '%'+searchText+'%';
@@ -92,7 +92,32 @@ public class MemberService {
     }
 
 
+    /**
+     *  책 전체 리스트
+     *
+     * @param
+     * @return BookListResponse
+     */
+    public List<BookListResponse> allBookList(){
+        return bookRepository.findAll().stream().map(BookListResponse::from).toList();
+    }
 
+    /**
+     *  책 날짜순 정렬
+     * @return BookListResponse
+     */
+    public List<BookListResponse> orderByCreateDate(){
+        return bookRepository.findAllByOrderByCreateDateDesc()
+                .stream().map(BookListResponse::from).toList();
+    }
 
+    /**
+     *  책 이름순 정렬
+     * @return
+     */
+    public List<BookListResponse> orderByName(){
+        return bookRepository.findAllByOrderByName()
+                .stream().map(BookListResponse::from).toList();
+    }
 
 }

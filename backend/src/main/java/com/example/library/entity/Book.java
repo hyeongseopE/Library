@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -26,7 +27,7 @@ public class Book {
 
     private String publisher;    // 출판사
 
-    private LocalDateTime createDate; // 출간년도
+    private LocalDate createDate; // 출간년도
 
     private Integer price;            // 가격
 
@@ -42,10 +43,15 @@ public class Book {
         this.status = BookStatus.AVAILABLE;
     }
 
+    public void isOver(){
+        this.status = BookStatus.OVERDUE;
+    }
+
     public void update(BookUpdateRequest request){
-        this.name = request.getBookName();
+        this.name = request.getName();
         this.writer = request.getWriter();
         this.publisher = request.getPublisher();
+        this.createDate = request.getCreateDate();
         this.price = request.getPrice();
     }
 }

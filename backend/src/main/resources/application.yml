@@ -1,8 +1,11 @@
 spring:
+  sql:
+    init:
+      mode: always
   application:
     name: library
   datasource:
-    url: jdbc:h2:file:C:/springProject/h2db/librarydb
+    url: jdbc:h2:file:./librarydb
     driver-class-name: org.h2.Driver
     username: sa
     password:
@@ -12,8 +15,9 @@ spring:
       path: /h2-console
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
+    defer-datasource-initialization: true
     database-platform: org.hibernate.dialect.H2Dialect
 
 jwt:
